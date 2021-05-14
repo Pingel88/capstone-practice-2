@@ -8,6 +8,8 @@ const scoreEl = document.querySelector('#scoreEl');
 const startGameBtn = document.querySelector('#startGameBtn');
 const modalEl = document.querySelector('#modalEl');
 const bigScoreEl = document.querySelector('#bigScoreEl');
+const colemanFace = document.querySelector('#colemanFace');
+console.log(colemanFace);
 
 class Player {
   constructor(x, y, radius, color) {
@@ -62,6 +64,9 @@ class Enemy {
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     c.fillStyle = this.color;
     c.fill();
+    const imageHeight = this.radius * 2;
+    const imageWidth = imageHeight / colemanFace.height * colemanFace.width;
+    c.drawImage(colemanFace, this.x - imageWidth / 2, this.y - this.radius, imageWidth, imageHeight);
   }
 
   update() {
@@ -144,7 +149,7 @@ function spawnEnemies() {
       y: Math.sin(angle)
     }
     enemies.push(new Enemy(x, y, radius, color, velocity))
-  }, 1000)
+  }, 100)
 }
 
 player.draw();
