@@ -4,6 +4,12 @@ https://www.youtube.com/playlist?list=PLpPnRKq7eNW3We9VdCfx9fprhqXHwTPXL
 
 /practice/canvas-resize
 
+Chris Courses HTML5 Canvas and JavaScript Game Tutorial:
+
+https://youtu.be/eI9idPTT0c4
+
+/practice/canvas-game
+
 
 
 Franks laboratory:
