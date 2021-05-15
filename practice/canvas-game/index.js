@@ -9,7 +9,8 @@ const startGameBtn = document.querySelector('#startGameBtn');
 const modalEl = document.querySelector('#modalEl');
 const bigScoreEl = document.querySelector('#bigScoreEl');
 const colemanFace = document.querySelector('#colemanFace');
-console.log(colemanFace);
+const daytonFace = document.querySelector('#daytonFace');
+const nephews = [colemanFace, daytonFace]
 
 class Player {
   constructor(x, y, radius, color) {
@@ -51,22 +52,25 @@ class Projectile {
 }
 
 class Enemy {
-  constructor(x, y, radius, color, velocity) {
+  constructor(x, y, radius, color, velocity, image) {
     this.x = x;
     this.y = y;
     this.radius = radius;
     this.color = color;
     this.velocity = velocity;
+    this.image = image;
   }
 
+  
   draw() {
+    const imageHeight = this.radius * 2;
+    const imageWidth = imageHeight / this.image.height * this.image.width;
+
     c.beginPath();
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     c.fillStyle = this.color;
     c.fill();
-    const imageHeight = this.radius * 2;
-    const imageWidth = imageHeight / colemanFace.height * colemanFace.width;
-    c.drawImage(colemanFace, this.x - imageWidth / 2, this.y - this.radius, imageWidth, imageHeight);
+    c.drawImage(this.image, this.x - imageWidth / 2, this.y - this.radius, imageWidth, imageHeight);
   }
 
   update() {
@@ -133,13 +137,16 @@ function spawnEnemies() {
     const radius = Math.random() * (50 - 10) + 10;
     let x;
     let y;
+    let image;
 
     if (Math.random() < 0.5) {
       x = Math.random() < 0.5 ? 0 - radius : canvas.width + radius;
       y = Math.random() * canvas.height;
+      image = nephews[0];
     } else {
       x = Math.random() * canvas.width;
       y = Math.random() < 0.5 ? 0 - radius : canvas.height + radius;
+      image = nephews[1];
     }
 
     const color = `hsl(${Math.random() * 360}, 50%, 50%)`;
@@ -148,7 +155,7 @@ function spawnEnemies() {
       x: Math.cos(angle),
       y: Math.sin(angle)
     }
-    enemies.push(new Enemy(x, y, radius, color, velocity))
+    enemies.push(new Enemy(x, y, radius, color, velocity, image))
   }, 100)
 }
 
