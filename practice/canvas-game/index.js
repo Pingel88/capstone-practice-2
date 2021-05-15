@@ -10,6 +10,7 @@ const modalEl = document.querySelector('#modalEl');
 const bigScoreEl = document.querySelector('#bigScoreEl');
 const colemanFace = document.querySelector('#colemanFace');
 const daytonFace = document.querySelector('#daytonFace');
+const mikeFace = document.querySelector('#mikeFace');
 const nephews = [colemanFace, daytonFace]
 
 class Player {
@@ -18,13 +19,18 @@ class Player {
     this.y = y;
     this.radius = radius;
     this.color = color;
+    this.image = mikeFace;
   }
 
   draw() {
+    const imageHeight = this.radius * 2;
+    const imageWidth = imageHeight / this.image.height * this.image.width;
+
     c.beginPath();
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     c.fillStyle = this.color;
     c.fill();
+    c.drawImage(this.image, this.x - imageWidth / 2, this.y - this.radius, imageWidth, imageHeight);
   }
 }
 
@@ -115,13 +121,13 @@ class Particle {
 const originX = canvas.width / 2;
 const originY = canvas.height / 2;
 
-let player = new Player(originX, originY, 10, 'white');
+let player = new Player(originX, originY, 50, 'orange');
 let projectiles = [];
 let enemies = [];
 let particles = [];
 
 function init() {
-  player = new Player(originX, originY, 10, 'white');
+  player = new Player(originX, originY, 50, 'orange');
   projectiles = [];
   enemies = [];
   particles = [];
@@ -152,11 +158,11 @@ function spawnEnemies() {
     const color = `hsl(${Math.random() * 360}, 50%, 50%)`;
     const angle = Math.atan2(originY - y, originX - x);
     const velocity = {
-      x: Math.cos(angle),
-      y: Math.sin(angle)
+      x: Math.cos(angle) * .5,
+      y: Math.sin(angle) * .5
     }
     enemies.push(new Enemy(x, y, radius, color, velocity, image))
-  }, 100)
+  }, 2000)
 }
 
 player.draw();
