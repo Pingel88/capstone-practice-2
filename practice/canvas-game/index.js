@@ -140,7 +140,7 @@ function init() {
 
 function spawnEnemies() {
   setInterval(() => {
-    const radius = Math.random() * (50 - 10) + 10;
+    const radius = Math.random() * (100 - 10) + 10;
     let x;
     let y;
     let image;
