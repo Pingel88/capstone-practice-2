@@ -162,10 +162,12 @@ function spawnEnemies() {
       y: Math.sin(angle) * .5
     }
     enemies.push(new Enemy(x, y, radius, color, velocity, image))
+    console.log('spawn');
   }, 2000)
 }
 
 player.draw();
+spawnEnemies();
 
 let animationId
 let score = 0;
@@ -265,6 +267,5 @@ addEventListener('click', (event) => {
 startGameBtn.addEventListener('click', () => {
   init();
   animate();
-  spawnEnemies();
   modalEl.style.display = 'none';
 })
